@@ -6,6 +6,7 @@ App desenvolvido do zero em Swift pelo time iOS que tem por objetivo mostrar os 
 
 <p align=center> https://www.appmarvel.com.br (em breve) </p>
 
+![Simulator Screen Shot - iPhone 12 - 2022-07-15 at 09 58 14](https://user-images.githubusercontent.com/101293197/179369258-e569434c-126d-462d-a97b-565f9d1c1051.png)
 
 
 ## Telas:
