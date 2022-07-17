@@ -4,13 +4,7 @@
 
 App desenvolvido do zero em Swift pelo time iOS que tem por objetivo mostrar os filmes da Marvel, onde o usuário pode ver indicação de filmes anteriores e calcular o seu nível de fã da Marvel.  Foi usado o padrão de projeto MVVM.
 
-
-
-
-https://user-images.githubusercontent.com/101293197/179371449-35bdb078-bd63-4075-81f7-923b75a90350.mp4
-
-
-
+https://user-images.githubusercontent.com/101293197/179419490-3d2f3eb8-e25c-4c73-a720-64f795660255.mp4
 
 ## Telas:
 
