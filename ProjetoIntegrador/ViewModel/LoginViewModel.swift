@@ -9,6 +9,8 @@ import Foundation
 import FirebaseCore
 import GoogleSignIn
 import FirebaseAuth
+import FacebookCore
+import FacebookLogin
 
 protocol LoginViewModelDelegate {
     func apresentaAlerta()
@@ -20,6 +22,7 @@ class LoginViewModel {
     var usuarioEnviado: Usuario?
     var fireBaseService = FireBaseService()
     var usuarioGoogle: GIDGoogleUser?
+    var servicoCoreData = ServiceCoreData()
     
     // função para conferir se o usuário existe na base
     func confereUsuario(usuarioDig: String?, senhaDigitada: String?) -> Bool {
@@ -44,11 +47,46 @@ class LoginViewModel {
         }
     }
     
-    func loginGoogle() {
-        fireBaseService.loginGoogle { usuario in
+    func loginGoogle(presenter: UIViewController) {
+        fireBaseService.loginGoogle(presenter: presenter) { usuario in
             self.usuarioGoogle = usuario
         }
     }
+    
+    func tratarLoginFacebook(result: LoginManagerLoginResult?, error: Error?){
+            
+            fireBaseService.tratarLoginFacebook(result: result, error: error)
+        }
+    
+    func verifyUser(email: String?, password: String?){
+            guard let email = email, let password = password else { return }
+            
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    self.delegate?.apresentaAlerta()
+                } else {
+                    self.delegate?.segue()
+                    self.getUsuario(email: email, password: password)
+                }
+            }
+        }
+    
+    private var usuarios: [UsuarioEntities] {
+        try! servicoCoreData.fetchUsuario()
+    }
+    
+    func getUsuario(email: String, password: String) -> UsuarioEntities? {
+        if let usuario = usuarios.first(where: {
+            return $0.email == email && $0.senha == password
+        }) {
+            return usuario
+        }
+        return nil
+    }
+    
+    
+    
 }
 
 

@@ -35,17 +35,19 @@
 		3357B1AB28442858007D611C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3357B1AA28442858007D611C /* Data.swift */; };
 		336A38CF2856916C00814CA3 /* FilmeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A38CE2856916C00814CA3 /* FilmeViewModel.swift */; };
 		336A38D12856987D00814CA3 /* DetalheDoFilmeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A38D02856987D00814CA3 /* DetalheDoFilmeViewModel.swift */; };
-		33F3FB2F287F9F4100FC76C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F3FB2E287F9F4100FC76C2 /* GoogleService-Info.plist */; };
 		33F3FB31287FA1F700FC76C2 /* FireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3FB30287FA1F700FC76C2 /* FireBaseService.swift */; };
 		54BC2B22D649BB6C83821C3C /* Pods_ProjetoIntegradorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A283DAF1B45491C38FBBCEE /* Pods_ProjetoIntegradorTests.framework */; };
 		5947F00A7D8BEEC0CBED7425 /* Pods_ProjetoIntegrador_ProjetoIntegradorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53FC665A2528476EA2994BE /* Pods_ProjetoIntegrador_ProjetoIntegradorUITests.framework */; };
 		5DA412CD8E1121E64E8A3425 /* Pods_ProjetoIntegrador.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE2BDC3F79A7042ED402856 /* Pods_ProjetoIntegrador.framework */; };
+		5E2BD6DC28875A3A00558557 /* ServiceCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BD6DB28875A3A00558557 /* ServiceCoreData.swift */; };
 		5E5B68CA28464F6D00AF6A6C /* ConfiguracoesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5B68C928464F6D00AF6A6C /* ConfiguracoesViewController.swift */; };
 		5E5B68CC2846519800AF6A6C /* DadosPessoaisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5B68CB2846519800AF6A6C /* DadosPessoaisViewController.swift */; };
 		5E8A070028593BD900F09A5D /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A06FF28593BD900F09A5D /* MovieAPI.swift */; };
 		5EABB816285011EC00250EF6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EABB815285011EC00250EF6 /* SessionManager.swift */; };
+		5EC586672887500400F03204 /* UsuarioEntities+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC586662887500400F03204 /* UsuarioEntities+CoreDataClass.swift */; };
 		5ECB49D12865349800F19206 /* Spoiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECB49D02865349800F19206 /* Spoiler.swift */; };
 		5ECB49D32865361E00F19206 /* ServicoDeSpoiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECB49D22865361E00F19206 /* ServicoDeSpoiler.swift */; };
+		EE08BC4B28876B8D007ED060 /* UsuarioEntities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08BC4A28876B8C007ED060 /* UsuarioEntities+CoreDataProperties.swift */; };
 		EE1020A12852A94900D39141 /* NovoUsuarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1020A02852A94900D39141 /* NovoUsuarioViewModel.swift */; };
 		EE118C2E28445906005852F7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE118C2D28445906005852F7 /* HomeViewController.swift */; };
 		EE118C30284459BA005852F7 /* FilmesEmDestaquesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE118C2F284459BA005852F7 /* FilmesEmDestaquesCollectionViewCell.swift */; };
@@ -59,6 +61,7 @@
 		EE53C4BB2851087B005DB3AC /* FavoritoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE53C4BA2851087B005DB3AC /* FavoritoViewModel.swift */; };
 		EE53C4BD28510B3C005DB3AC /* SpoilerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE53C4BC28510B3C005DB3AC /* SpoilerViewController.swift */; };
 		EEC71A38286F735D001116E7 /* SpoilerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC71A37286F735D001116E7 /* SpoilerViewModel.swift */; };
+		FB64D92A2880E3FD00D7C509 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB64D9292880E3FD00D7C509 /* GoogleService-Info.plist */; };
 		FBDBE28028443AC100C897A4 /*  ServicoDeUsuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBE27F28443AC100C897A4 /*  ServicoDeUsuario.swift */; };
 		FBDBE28228443D7B00C897A4 /* Fanzometro.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBE28128443D7B00C897A4 /* Fanzometro.swift */; };
 		FBDBE28428443F5600C897A4 /* FanzometroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBE28328443F5600C897A4 /* FanzometroViewModel.swift */; };
@@ -119,19 +122,21 @@
 		3357B1AA28442858007D611C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		336A38CE2856916C00814CA3 /* FilmeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeViewModel.swift; sourceTree = "<group>"; };
 		336A38D02856987D00814CA3 /* DetalheDoFilmeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalheDoFilmeViewModel.swift; sourceTree = "<group>"; };
-		33F3FB2E287F9F4100FC76C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		33F3FB30287FA1F700FC76C2 /* FireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseService.swift; sourceTree = "<group>"; };
 		48ECC4ED4689C094A34A207C /* Pods-ProjetoIntegrador.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjetoIntegrador.release.xcconfig"; path = "Target Support Files/Pods-ProjetoIntegrador/Pods-ProjetoIntegrador.release.xcconfig"; sourceTree = "<group>"; };
 		4EE2BDC3F79A7042ED402856 /* Pods_ProjetoIntegrador.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjetoIntegrador.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E2BD6DB28875A3A00558557 /* ServiceCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCoreData.swift; sourceTree = "<group>"; };
 		5E5B68C928464F6D00AF6A6C /* ConfiguracoesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguracoesViewController.swift; sourceTree = "<group>"; };
 		5E5B68CB2846519800AF6A6C /* DadosPessoaisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DadosPessoaisViewController.swift; sourceTree = "<group>"; };
 		5E8A06FF28593BD900F09A5D /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		5EABB815285011EC00250EF6 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		5EC586662887500400F03204 /* UsuarioEntities+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UsuarioEntities+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5ECB49D02865349800F19206 /* Spoiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spoiler.swift; sourceTree = "<group>"; };
 		5ECB49D22865361E00F19206 /* ServicoDeSpoiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicoDeSpoiler.swift; sourceTree = "<group>"; };
 		683884787664D271617361E1 /* Pods-ProjetoIntegrador.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjetoIntegrador.debug.xcconfig"; path = "Target Support Files/Pods-ProjetoIntegrador/Pods-ProjetoIntegrador.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1D4897F9C2BAF7AE22CC3E /* Pods-ProjetoIntegradorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjetoIntegradorTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjetoIntegradorTests/Pods-ProjetoIntegradorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC1839B83CDFF177A8AFD7F3 /* Pods-ProjetoIntegradorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjetoIntegradorTests.release.xcconfig"; path = "Target Support Files/Pods-ProjetoIntegradorTests/Pods-ProjetoIntegradorTests.release.xcconfig"; sourceTree = "<group>"; };
+		EE08BC4A28876B8C007ED060 /* UsuarioEntities+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UsuarioEntities+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE1020A02852A94900D39141 /* NovoUsuarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovoUsuarioViewModel.swift; sourceTree = "<group>"; };
 		EE118C2D28445906005852F7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		EE118C2F284459BA005852F7 /* FilmesEmDestaquesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmesEmDestaquesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -146,6 +151,7 @@
 		EE53C4BC28510B3C005DB3AC /* SpoilerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoilerViewController.swift; sourceTree = "<group>"; };
 		EEC71A37286F735D001116E7 /* SpoilerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoilerViewModel.swift; sourceTree = "<group>"; };
 		F53FC665A2528476EA2994BE /* Pods_ProjetoIntegrador_ProjetoIntegradorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjetoIntegrador_ProjetoIntegradorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB64D9292880E3FD00D7C509 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBDBE27F28443AC100C897A4 /*  ServicoDeUsuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ServicoDeUsuario.swift"; sourceTree = "<group>"; };
 		FBDBE28128443D7B00C897A4 /* Fanzometro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fanzometro.swift; sourceTree = "<group>"; };
 		FBDBE28328443F5600C897A4 /* FanzometroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanzometroViewModel.swift; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 		161E92C8286B9E95005EF165 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				5EC586662887500400F03204 /* UsuarioEntities+CoreDataClass.swift */,
+				EE08BC4A28876B8C007ED060 /* UsuarioEntities+CoreDataProperties.swift */,
 				1F6FABDA286FD23500F7E7D1 /* FilmesParaAssistir+CoreDataClass.swift */,
 				1F6FABDB286FD23500F7E7D1 /* FilmesParaAssistir+CoreDataProperties.swift */,
 				161E92C4286B9DEB005EF165 /* FilmesEntities+CoreDataClass.swift */,
@@ -198,6 +206,7 @@
 				161E92CA286BA143005EF165 /* FilmeEntityService.swift */,
 				FBEAD0A4287374AD00C9029D /* UserDefaultsService.swift */,
 				33F3FB30287FA1F700FC76C2 /* FireBaseService.swift */,
+				5E2BD6DB28875A3A00558557 /* ServiceCoreData.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -241,8 +250,8 @@
 				1629ED2A28417271009F9D2C /* Main Tela Cadastro.storyboard */,
 				16753074283EB9F800D7CE3A /* Assets.xcassets */,
 				16753076283EB9F800D7CE3A /* LaunchScreen.storyboard */,
+				FB64D9292880E3FD00D7C509 /* GoogleService-Info.plist */,
 				16753079283EB9F800D7CE3A /* Info.plist */,
-				33F3FB2E287F9F4100FC76C2 /* GoogleService-Info.plist */,
 				16753071283EB9F700D7CE3A /* ProjetoIntegrador.xcdatamodeld */,
 				169B6CDE2852D6D7006C44A5 /* AFazer.md */,
 			);
@@ -480,7 +489,7 @@
 				16753078283EB9F800D7CE3A /* LaunchScreen.storyboard in Resources */,
 				16753075283EB9F800D7CE3A /* Assets.xcassets in Resources */,
 				16753070283EB9F700D7CE3A /* Main.storyboard in Resources */,
-				33F3FB2F287F9F4100FC76C2 /* GoogleService-Info.plist in Resources */,
+				FB64D92A2880E3FD00D7C509 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,9 +621,11 @@
 				16D749EB284981F200ECD9DB /* LoginViewController.swift in Sources */,
 				16753073283EB9F700D7CE3A /* ProjetoIntegrador.xcdatamodeld in Sources */,
 				16D749ED2849829400ECD9DB /* LoginViewModel.swift in Sources */,
+				5E2BD6DC28875A3A00558557 /* ServiceCoreData.swift in Sources */,
 				5E5B68CA28464F6D00AF6A6C /* ConfiguracoesViewController.swift in Sources */,
 				336A38CF2856916C00814CA3 /* FilmeViewModel.swift in Sources */,
 				EE2D484B284FD6F900C6CFF2 /* ConfiguracaoViewModel.swift in Sources */,
+				5EC586672887500400F03204 /* UsuarioEntities+CoreDataClass.swift in Sources */,
 				5EABB816285011EC00250EF6 /* SessionManager.swift in Sources */,
 				EE118C382844E6D6005852F7 /* PesquisaViewController.swift in Sources */,
 				EE118C3628446054005852F7 /* FilmesDetalhesViewController.swift in Sources */,
@@ -623,6 +634,7 @@
 				FBEAD0A5287374AD00C9029D /* UserDefaultsService.swift in Sources */,
 				1642540428442A7D006F92A4 /* Usuario.swift in Sources */,
 				EE1020A12852A94900D39141 /* NovoUsuarioViewModel.swift in Sources */,
+				EE08BC4B28876B8D007ED060 /* UsuarioEntities+CoreDataProperties.swift in Sources */,
 				1699316C284E9D9F00AF1014 /* PesquisaCollectionViewCell.swift in Sources */,
 				EE118C3228445AB2005852F7 /* HomeViewModel.swift in Sources */,
 				5ECB49D32865361E00F19206 /* ServicoDeSpoiler.swift in Sources */,
@@ -830,7 +842,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X26TH89CCX;
+				DEVELOPMENT_TEAM = N34W3XSZ62;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProjetoIntegrador/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permissão para acessar a camera";
@@ -844,7 +856,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DH.ProjetoIntegrador.Marvel;
+				PRODUCT_BUNDLE_IDENTIFIER = daniellenogawa.com.DH.ProjetoIntegrador.Marvel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -860,7 +872,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X26TH89CCX;
+				DEVELOPMENT_TEAM = N34W3XSZ62;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProjetoIntegrador/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permissão para acessar a camera";
@@ -874,7 +886,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DH.ProjetoIntegrador.Marvel;
+				PRODUCT_BUNDLE_IDENTIFIER = daniellenogawa.com.DH.ProjetoIntegrador.Marvel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

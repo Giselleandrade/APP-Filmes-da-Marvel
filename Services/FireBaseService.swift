@@ -10,13 +10,12 @@ import UIKit
 import FirebaseCore
 import GoogleSignIn
 import FirebaseAuth
+import FacebookCore
+import FacebookLogin
 
 class FireBaseService {
     
-    let login = HomeViewController()
-    
-    
-    func loginGoogle(completion: @escaping (GIDGoogleUser?) -> Void) {
+    func loginGoogle(presenter: UIViewController, completion: @escaping (GIDGoogleUser?) -> Void) {
     
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
@@ -24,7 +23,7 @@ class FireBaseService {
         let config = GIDConfiguration(clientID: clientID)
         
         // Start the sign in flow!
-        GIDSignIn.sharedInstance.signIn(with: config, presenting: login) { [unowned self] user, error in
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: presenter) { [unowned self] user, error in
             
             if let error = error {
                 // ...
@@ -51,7 +50,32 @@ class FireBaseService {
         }
     }
     
- 
+    func tratarLoginFacebook(result: LoginManagerLoginResult?, error: Error?) {
+            switch result {
+                
+            case .none:
+                print("erro no login")
+            case .some(let loginResult):
+                guard let token = loginResult.token?.tokenString else {
+                    return
+                }
+                
+                let credential = pegarConfiguracaoFacebook(token: token)
+                salvarNoFireBase(com: credential)
+            }
+        }
+        func pegarConfiguracaoFacebook(token: String) -> AuthCredential {
+            return FacebookAuthProvider.credential(withAccessToken: token)
+        }
+        func salvarNoFireBase(com credential: AuthCredential){
+            Auth.auth().signIn(with: credential) { AuthResult, error in
+                if let error = error {
+                    print(error)
+                }
+                
+                return
+            }
+        }
     
 }
 

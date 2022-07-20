@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FacebookLogin
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
-    
     
     @IBOutlet weak var usuarioTextField: UITextField!
     @IBOutlet weak var senhaTextField: UITextField!
@@ -16,23 +18,40 @@ class LoginViewController: UIViewController {
     let service = ServicoDeUsuario()
     let viewModel = LoginViewModel()
   
+    let loginButton = FBLoginButton(
+                frame: .zero,
+                permissions: [.publicProfile]
+            )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
+        
+        
+        
+        loginButton.isHidden = true
+        
+        loginButton.delegate = self
+        
+                loginButton.center = view.center
+                view.addSubview(loginButton)
     }
     
     @IBAction func loginGoogleButtom(_ sender: Any) {
-        viewModel.loginGoogle()
+        viewModel.loginGoogle(presenter: self)
+    
     }
     
     
     @IBAction func loginFacebookButtom(_ sender: Any) {
+        
+        loginButton.sendActions(for: .touchUpInside)
     }
     
     
 // quando o usuario clicar no botão de login ele é direcionado para a tela home
     @IBAction func loginAction(_ sender: Any) {
-        viewModel.mudarDeTela(usuario: viewModel.confereUsuario(usuarioDig: usuarioTextField.text, senhaDigitada: senhaTextField.text))
+        viewModel.verifyUser(email: usuarioTextField.text, password: senhaTextField.text)
     }
 // caso seja o primeiro acesso do usuário, ao clicar no botão "Não tem conta? Cadastre-se aqui" será direcionado a tela de cadastro
     @IBAction func cadastrarNovoUsuarioButton(_ sender: Any) {
@@ -52,5 +71,21 @@ extension LoginViewController: LoginViewModelDelegate {
     // se o usuario for encontrado é direcionado para a tela home
     func segue() {
         performSegue(withIdentifier: "appSegueIndentifier", sender: nil)
+    }
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        viewModel.tratarLoginFacebook(result: result, error: error)
+        }
+   
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
     }
 }
