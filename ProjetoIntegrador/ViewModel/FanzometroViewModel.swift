@@ -11,27 +11,29 @@ import UIKit
 class FanzometroViewModel {
     
     var servicoDeAPI = MovieAPI()
-    let service = ServicoDeUsuario()
-    let filmeEntityService = FilmeEntityService()
+    let userDefaults = UserDefaultsService()
     
+    var quantidadeDeFilmes: Int?
     var porcentagem: String = ""
     var filmes: [Filme] = []
+    var sessionManager = SessionManager()
     
     // usuario logado
     private var usuarioLogado: Usuario? {
         return SessionManager.shared.usuarioLogado
     }
+    private var usuarioLogadoEntities: UsuarioEntities? {
+        return SessionManager.shared.usuarioEntities
+    }
     
     // quantidade filmes favoritos do usuario
     func numeroDeFilmesFavoritos() -> Int {
-        return ((try? filmeEntityService.favoritos()) ?? []).count
-        
+        return usuarioLogadoEntities?.listaDeFilmesFavoritos.count ?? 0
     }
     
     // recebe a foto do usuario
-    func getFotoUsuario() -> String {
-        guard let usuarioLogado = usuarioLogado else { return "" }
-        return usuarioLogado.foto
+    func getFotoUsuario() -> UIImage? {
+        return usuarioLogadoEntities?.wrappedFoto
     }
     
     // calcula o nivel de fanzometro
@@ -48,13 +50,33 @@ class FanzometroViewModel {
     
     // retorna a porcentagem de fã do usuario
     func getFanzometroDoUsuario(completion: @escaping (String) -> Void) {
-        let favoritos = (try? filmeEntityService.favoritos()) ?? []
+        let favoritos = usuarioLogadoEntities?.listaDeFilmesFavoritos ?? []
        fanzometroPorcentagem(listaDeFavoritos: favoritos, completion: completion)
     }
     
+    
+    // calcula o nivel de fanzometro int
+    public func fanzometroPorcentagemDouble(completion: @escaping (Int) -> Void) {
+        getFilmesDaApi {
+            
+            self.servicoDeAPI.loadFilmes { listaFilmeAPI in
+            self.quantidadeDeFilmes = listaFilmeAPI.count
+            }
+            
+            let quantidadeDeAssistidos: Int = self.userDefaults.loadDefaults().count
+            
+            guard let quantidadeDeFilmes = self.quantidadeDeFilmes else {
+                return
+            }
+            let porcentagemFanzometro = Int((100 * quantidadeDeAssistidos) / quantidadeDeFilmes)
+                completion(porcentagemFanzometro)
+        }
+    }
+    
+    
     // envia os dados do filme para a celula
     func getViewModel(posicao: Int) -> FilmeViewModel {
-        let filmes = (try? filmeEntityService.favoritos()) ?? []
+        let filmes = usuarioLogadoEntities?.listaDeFilmesFavoritos ?? []
         let filme = filmes[posicao]
         let cellViewModel = FilmeViewModel(filme: filme)
         return cellViewModel

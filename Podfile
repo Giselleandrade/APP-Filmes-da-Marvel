@@ -10,7 +10,12 @@ target 'ProjetoIntegrador' do
   	pod 'GoogleSignIn'
   	pod 'FacebookCore'
   	pod 'FacebookLogin'
-
+	pod 'FirebaseFirestore'
+	pod 'FirebaseDatabase'
+	pod 'FirebaseCore'
+	pod 'FirebaseStorage'
+	pod 'KDCircularProgress'
+	pod "MBCircularProgressBar"
 
   target 'ProjetoIntegradorTests' do
     inherit! :search_paths

@@ -8,27 +8,21 @@
 import Foundation
 
 class FavoritoViewModel {
-    
-    let service = ServicoDeUsuario()
-    let serviceCoreData = FilmeEntityService()
     let servicoDeSpoiler = ServicoDeSpoiler()
     
     var filmeSelecionado: Filme?
     var spoilerFilmeSelecionado: Spoiler?
     
-    
-    func atualizaView(){
-        
-    }
-    
+    // lista de filmes a assistir
     var filmes: [Filme] {
-        try! serviceCoreData.assistirMaisTarde()
+        return usuarioLogadoEntities?.listaDeFilmesAssistirDepois ?? []
     }
     
-    private var usuarioLogado: Usuario? {
-        return SessionManager.shared.usuarioLogado
+    // usuario logado
+    private var usuarioLogadoEntities: UsuarioEntities? {
+        return SessionManager.shared.usuarioEntities
     }
-    
+
     func numeroDeFilmesFavoritos() -> Int {
         return filmes.count
 
@@ -45,15 +39,10 @@ class FavoritoViewModel {
         return cellViewModel
     }
     
-
-    
     func getSpoiler(filme: Filme?) -> Spoiler? {
-  
-        
         let spoilerExist = servicoDeSpoiler.listaDeFilmesSpoiler.first { tituloDoFilmeNoSpoiler in
             tituloDoFilmeNoSpoiler.title == filme?.title
         }
-        
         return spoilerExist
     }
     

@@ -24,12 +24,12 @@
     </entity>
     <entity name="UsuarioEntities" representedClassName="UsuarioEntities" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="foto" optional="YES" attributeType="String"/>
+        <attribute name="foto" optional="YES" attributeType="Binary"/>
         <attribute name="nivelDeFa" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="nome" optional="YES" attributeType="String"/>
         <attribute name="senha" optional="YES" attributeType="String"/>
         <relationship name="filmesentities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilmesEntities" inverseName="parenteUsuario" inverseEntity="FilmesEntities"/>
-        <relationship name="filmesParaAssistir" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FilmesParaAssistir" inverseName="parenteUsuario" inverseEntity="FilmesParaAssistir"/>
+        <relationship name="filmesParaAssistir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilmesParaAssistir" inverseName="parenteUsuario" inverseEntity="FilmesParaAssistir"/>
     </entity>
     <elements>
         <element name="FilmesEntities" positionX="-63" positionY="-18" width="128" height="164"/>

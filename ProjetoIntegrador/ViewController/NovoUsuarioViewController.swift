@@ -11,31 +11,71 @@ class NovoUsuarioViewController: UIViewController {
     @IBOutlet weak var nomeTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var senhaTextField: UITextField!
+    @IBOutlet weak var addFotoButton: UIButton!
+    @IBOutlet weak var fotoUser: UIImageView!
     
     let viewModel = NovoUsuarioViewModel()
+  //  private var userImage: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
+        nomeTextField.delegate = self
+        emailTextField.delegate = self
+        senhaTextField.delegate = self
+        fotoUser.layer.cornerRadius = 150/2
+        fotoUser.layer.borderWidth = 4
+        fotoUser.layer.borderColor = UIColor.red.cgColor
+        fotoUser.layer.masksToBounds = true
+        
     }
     
     // cadastrar usuario
     @IBAction func cadastrarButton(_ sender: Any) {
-        viewModel.registrarUsuario(email: emailTextField.text, senha: senhaTextField.text, nome: nomeTextField.text)
+        let foto = fotoUser?.image
+        viewModel.registrarUsuario(nome: nomeTextField.text, senha: senhaTextField.text, email: emailTextField.text, fotoUsuario: foto)
+    
+    }
+    
+    // cadastrar foto do usuario
+    
+    @IBAction func fotoUsuarioButton(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true)
+        viewWillAppear(true)
+    }
+    
+}
+extension NovoUsuarioViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            fotoUser.image = image
+        }
+        dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }
 
+extension NovoUsuarioViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
 // capta todas as acoes do usuario na tela
 extension NovoUsuarioViewController: NovoUsuarioViewModelDelegate {
+    //  cadastro efetuado corretamente e redireciona para a tela home
     func usuarioCadastrado() {
         performSegue(withIdentifier: "usuarioCadastradoSegue", sender: nil)
-    }
-    
-    //  cadastro efetuado corretamente e redireciona para a tela de login
-    func cadastroEfetuado() {
-        dismiss(animated: true) {
-            self.performSegue(withIdentifier: "voltarIdentifier", sender: self.viewModel.novoUsuarioCriado)
-        }
     }
     
     // alerta de dados incorretos

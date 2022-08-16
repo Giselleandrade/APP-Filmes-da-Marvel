@@ -8,15 +8,16 @@
 import Foundation
 import UIKit
 import CoreData
+import FirebaseAuth
 
 protocol HomeViewModelDelegate {
     func configuraPosterFilmeDestaque(imagem: UIImage)
 }
 
 class HomeViewModel {
-    private let servicosDeAPI = MovieAPI()
-    private let servicoDeSpoiler = ServicoDeSpoiler()
-    
+
+    // MARK: - Propriedades publicas
+
     var delegate: HomeViewModelDelegate?
     var filmeSelecionado: Filme?
     var spoiler: Spoiler?
@@ -24,6 +25,13 @@ class HomeViewModel {
     var filmeDestaquePoster: UIImage?
     var filmes: [Filme] = []
     var filmesCoreData: [Filme] = []
+    
+    // MARK: - Propriedades privadas
+    private let sessionManager = SessionManager.shared
+    private let servicosDeAPI = MovieAPI()
+    private let servicoDeSpoiler = ServicoDeSpoiler()
+    private let firebaseService = FireBaseService()
+    private let servicoCoreData = ServiceCoreData()
     
     // usuario logado
     private var usuarioLogado: Usuario? {
@@ -55,6 +63,8 @@ class HomeViewModel {
         return filmeSelecionado
     }
     
+    
+    // pega o spoiler do filme
     func getSpoiler(filme: Filme?) -> Spoiler? {
         let spoilerExist = servicoDeSpoiler.listaDeFilmesSpoiler.first { tituloDoFilmeNoSpoiler in
                tituloDoFilmeNoSpoiler.title == filme?.title
@@ -62,17 +72,15 @@ class HomeViewModel {
         spoiler = spoilerExist
             return spoiler
     }
+    
     // pega o posição do filme selecionado na lista
     func selecionarFilme(posicao: Int) {
         filmeSelecionado = getFilme(posicao: posicao)
         spoiler = getSpoiler(filme: filmeSelecionado)
     }
     
-    
-
     private func selecionarFilme(filme: Filme) {
         filmeSelecionado = filme
-        
     }
     
     // envia o filme selecionado para outra tela
@@ -94,13 +102,11 @@ class HomeViewModel {
         }
     }
     
-    
     func getFilmesDaAPI(completion: @escaping () -> Void){
         servicosDeAPI.loadFilmes { filmes in
             self.filmes = filmes
             self.filmeDestaque = filmes[2]
             completion()
-            
         }
     }
     

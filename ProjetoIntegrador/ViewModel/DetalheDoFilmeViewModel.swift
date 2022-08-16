@@ -38,17 +38,26 @@ class DetalheDoFilmeViewModel {
     var listaDeFilmesApi: [Filme] = []
     var listaDeFilmesAvaliados: [String: Int] = [:]
     var servicoUserDefault = UserDefaultsService.shared
-    private let filmeEntityService = FilmeEntityService()
+    var servicoCoreData = ServiceCoreData()
     
     var filme: Filme?
     var spoilerFilme: Spoiler?
     
     var delegate: FilmesViewModelDelegate?
-
+    
+    private var usuarioLogado: Usuario? {
+        return SessionManager.shared.usuarioLogado
+    }
+    
+    private var usuarioLogadoEntities: UsuarioEntities? {
+        return SessionManager.shared.usuarioEntities
+    }
+    
+    
     
     // MARK: - Botão Favoritar
     var favoritos: [Filme] {
-        return (try? filmeEntityService.favoritos()) ?? []
+        return usuarioLogadoEntities?.listaDeFilmesFavoritos ?? []
     }
     
     var isFavorite: Bool {
@@ -57,11 +66,13 @@ class DetalheDoFilmeViewModel {
         }
     }
     
-    func loadFavoritos(){
+    func loadFavoritos() {
+        guard let listaDeFavoritosUsuario = usuarioLogadoEntities?.wrappedFilmesentities else { return }
         do {
-        try listaDefavoritos = filmeEntityService.favoritos()
+            listaDefavoritos = try servicoCoreData.favoritos(favoritos: listaDeFavoritosUsuario)
+            
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
     
@@ -74,13 +85,15 @@ class DetalheDoFilmeViewModel {
             return favorito.title == filme.title
         }
         
+       // guard let usuario = SessionManager.shared.returnUsuarioEntities() else { return }
+        guard let usuario = usuarioLogadoEntities else { return }
         if exists {
-            try? filmeEntityService.remove(filme: filme)
+            try? servicoCoreData.removerFilmesDosFavoritos(usuario: usuario, filme: filme)
             delegate?.snackBarDesfavoritado()
             loadFavoritos()
-       } else {
+        } else {
             do {
-                try filmeEntityService.favoritar(filme: filme)
+                try servicoCoreData.adicionarFilmesAosFavoritos(usuario: usuario, filme: filme)
                 delegate?.snackBarFavoritado()
                 loadFavoritos()
             } catch {
@@ -104,7 +117,7 @@ class DetalheDoFilmeViewModel {
     
     // MARK: - Botão assistir mais tarde
     var assistirMaisTarde: [Filme] {
-        return (try? filmeEntityService.assistirMaisTarde()) ?? []
+        return usuarioLogadoEntities?.listaDeFilmesAssistirDepois ?? []
     }
     
     var isParaAssitir: Bool {
@@ -113,11 +126,13 @@ class DetalheDoFilmeViewModel {
         }
     }
     
-    func loadAssistirMaisTarde(){
+    func loadAssistirMaisTarde() {
+        guard let listaAssistirMaisTarde = usuarioLogadoEntities?.wrappedFilmesParaAssistir else { return }
         do {
-        try listaParaAssistirMaisTarde = filmeEntityService.assistirMaisTarde()
+            listaParaAssistirMaisTarde = try servicoCoreData.assistirMaisTarde(lista: listaAssistirMaisTarde)
+            
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
     
@@ -130,13 +145,14 @@ class DetalheDoFilmeViewModel {
             return filmeAssistido.title == filme.title
         }
         
+        guard let usuario = usuarioLogadoEntities else { return }
         if exists {
-            try? filmeEntityService.removeFilmeAssistido(filme: filme)
+            try? servicoCoreData.removerAssistirMaisTarde(usuario: usuario, filme: filme)
             delegate?.snackBarAssistido()
             loadAssistirMaisTarde()
-       } else {
+        } else {
             do {
-                try filmeEntityService.assistirMaisTarde(filme: filme)
+                try? servicoCoreData.adicionarFilmesAssistir(usuario: usuario, filme: filme)
                 delegate?.snackBarAssistirMaisTarde()
                 loadAssistirMaisTarde()
             } catch {
@@ -171,7 +187,7 @@ class DetalheDoFilmeViewModel {
     func loadFilmesAssistidos(){
         listaDeFilmesAssistidos = servicoUserDefault.loadDefaults()
     }
-
+    
     func assistido(filme: Filme?){
         
         guard let filme = filme else { return }
@@ -206,7 +222,7 @@ class DetalheDoFilmeViewModel {
             }
         }
     }
-
+    
     // MARK: - API
     
     func getPoster(filme: Filme?, completion: @escaping (UIImage?) -> Void) {
@@ -242,12 +258,12 @@ class DetalheDoFilmeViewModel {
     }
     
     func getCellViewModel(posicao: Int) -> FilmeViewModel {
-
+        
         let filme = getFilmesIndicados(spoilerDoFilme: spoilerFilme!)[posicao]
         let cellViewModel = FilmeViewModel(filme: filme)
         return cellViewModel
     }
-
+    
     //MARK: - avaliação de filmes salvando no userdefaults
     
     var avaliados: [String: Int]{
@@ -293,12 +309,12 @@ class DetalheDoFilmeViewModel {
     
     func getAvaliacao(){
         guard let filme = filme else { return }
-
+        
         let avaliado = listaDeFilmesAvaliados.first { $0.key.contains(filme.title!)
         }
         guard let avaliado = avaliado else { return }
-
+        
         getButtonAvalicao(avaliacao: avaliado.value)
     }
-
+    
 }
