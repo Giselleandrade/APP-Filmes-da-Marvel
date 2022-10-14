@@ -10,7 +10,7 @@ Aplicativo desenvolvido do zero pelo time iOS do curso de Swift da Digital House
 
 * Indicação de filmes anteriores para assistir: Sabendo que muitas pessoas tem dificuldade de entender alguns filmes por não terem visto alguns lançados antes que contém referências importantes, o app possui uma lista com a indicação de filmes para assistir anteriormente do escolhido, para que assim  este seja entendido por completo. 
 
-* Spoiler: Para quem quer matar a curiosidade, cada filme possui um spoiler onde o usuário consegue informações de um acontecimento importante
+* Spoiler: Para quem quer matar a curiosidade ou despertar o interesse, cada filme possui um spoiler onde o usuário consegue informações de um acontecimento importante no filme!!!
 
 
 ## Vídeo:
